@@ -46,7 +46,7 @@
 
 <ion-content class="has-header components-demo cards-bg social-cards" [style.background]="backgroundImageUrl">
     <ion-list #list>
-        <ion-item *ngFor="let article of articles; #i = index" text-wrap class="item item-trns text-center">
+        <ion-item *ngFor="let article of articles" text-wrap class="item item-trns text-center">
             <ion-card>
                 <div (click)="openFullArticle($event,article.OriginalLink)">
                     <img src="{{article.ImageUrl}}">

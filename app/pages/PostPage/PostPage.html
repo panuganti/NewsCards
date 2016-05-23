@@ -49,7 +49,7 @@
 
         <ion-card *ngIf="postPreview!=undefined && state == 'Preview'">
             <ion-slides [options]="options">
-                <ion-slide *ngFor="let image of postPreview.Images; #i = index">
+                <ion-slide *ngFor="let image of postPreview.Images">
                     <img [hidden]="!toggleImage" src="{{imageUrl}}" (click)="editImageUrl()">
                     <br>
                     <ion-textarea *ngIf="!toggleImage" placeholder="Image Url" (blur)="editImageUrl()" type=text [(ngModel)]="imageUrl" rows="5">

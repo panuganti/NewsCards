@@ -1,5 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import Dictionary = collections.Dictionary;
+//import Dictionary = collections.Dictionary;
 
 import {Device} from 'ionic-native';
 import {Injectable} from '@angular/core';
@@ -21,13 +21,14 @@ export class Config {
     globalTimer: number = 0;
     isOnAndroid: boolean = false;
     
-    labels: Dictionary<string, string> = new Dictionary<string, string>();
+   // labels: Dictionary<string, string> = new Dictionary<string, string>();
     //#endregion global variables
         
     constructor(public service: ServiceCaller) {
     }   
 
     setUser(): Observable<User> {
+        let parentThis = this;
         let user: User = window.localStorage.getItem('user');
         if (user == undefined || user == null) {
             let userId: string = 'testId';
@@ -38,14 +39,15 @@ export class Config {
             }            
             let userOb = this.service.getUser(userId, this.language);
             userOb.subscribe(data => {
-                this.user = data;
+                parentThis.user = data;
+                console.log(this.user);
             });
             return userOb;
         }
         else {
-            this.user = user;
-                console.log(this.user.Id);
-                console.log(this.user.CanPost);
+            parentThis.user = user;
+                console.log(parentThis.user.Id);
+                console.log(parentThis.user.CanPost);
             return Observable.of(user);
         }
     }
@@ -72,7 +74,7 @@ export class Config {
     printTimeElapsed() {
         console.log("Time: " + (new Date().getTime() - this.globalTimer) + "ms");
     }
-    
+    /*
     setLabels(labels: Dictionary<string, string>) {
         this.labels = labels;
     }
@@ -80,13 +82,14 @@ export class Config {
     setInitialLabels() {
         this.labels = new Dictionary<string, string>();
     }
-    
+    */
     getLabel(label: string) {
         try {
-            return this.labels.getValue(label.toLowerCase()); 
+            return label;
         }
         catch(error) {
             return label;
         }
     }
+    
 }

@@ -105,6 +105,7 @@ export class NewsFeed {
     }
 
     refresh() {
+        console.log(this.config.user);
         this.newsFeedError = '';
         if (this.skip > 0) {this.content.scrollToTop();}
         this.skip = 0;
@@ -118,15 +119,18 @@ export class NewsFeed {
     }
 
     fetchArticles(skip: number) {
-        var loading = this.createLoading();
-        this.nav.present(loading); // TODO: Fix bug when used with OnPageWillEnter and OnPageDidEnter
+        debugger;
+        //var loading = this.createLoading();
+        //this.nav.present(loading); // TODO: Fix bug when used with OnPageWillEnter and OnPageDidEnter
         this.service.getNewsFeed(this.config.user.Id, skip)
             .subscribe(posts => {
-                loading.dismiss();
+                debugger;
+                console.log(posts);
+                //loading.dismiss();
                 this.update(posts, skip);
             },
             err => {
-                loading.dismiss();
+                //loading.dismiss();
                 console.log('error..');
                 this.handleError(err)
             });

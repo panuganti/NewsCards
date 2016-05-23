@@ -1,5 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import Dictionary = collections.Dictionary;
+//import Dictionary = collections.Dictionary;
 
 import {Contacts} from 'ionic-native';
 import {Contact} from 'ionic-native/dist/plugins/contacts';
@@ -12,14 +12,15 @@ import {Config} from './config';
 @Injectable()
 export class Cache {
     MAX_CACHE_SIZE: number = 1000;
-    langArticleCache: Dictionary<string, Article[]>;
+/*    langArticleCache: Dictionary<string, Article[]>;
     labelsCache: Dictionary<string, string> = new Dictionary<string, string>();
     articleCache: Dictionary<string, Article[]> = new Dictionary<string, Article[]>();
+*/
     contacts: Contact[] = [];
 
     constructor() {
     }
-
+/*
     //#region Labels Cache
     setLabels(labelsCache: Dictionary<string, string>) {
         this.labelsCache = labelsCache;
@@ -43,4 +44,5 @@ export class Cache {
         return this.langArticleCache.getValue(lang);
     }
     //#endregion Article Cache
+    */
 }

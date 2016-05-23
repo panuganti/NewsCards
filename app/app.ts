@@ -28,6 +28,7 @@ export class MyApp {
         this.config.initTimer();
         let userOb = this.config.setUser();
         userOb.subscribe(res => {
-            this.rootPage = NewsFeed});
+            this.rootPage = NewsFeed
+        });
     }
 }

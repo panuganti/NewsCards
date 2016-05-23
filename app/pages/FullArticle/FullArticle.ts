@@ -15,9 +15,7 @@ export class FullArticle {
 
     init(params: NavParams) {
         this.src = this.params.get('src');
-        if (this.config.labels.containsKey('Back')) {
-            this.backLabel = this.config.labels.getValue('Back');
-        }
+            this.backLabel = 'Back';
     }
 
     goBack() {

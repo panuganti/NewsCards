@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import Dictionary = collections.Dictionary;
+//import Dictionary = collections.Dictionary;
 
 import {Page, NavController, ViewController, Loading} from 'ionic-angular';
 import {Component} from '@angular/core';
