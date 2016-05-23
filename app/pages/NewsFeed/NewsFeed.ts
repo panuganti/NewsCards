@@ -53,7 +53,6 @@ export class NewsFeed {
         //this.loadContacts();
     }
 
-
     //#region Notifications
     subscribeToNotifications() {
         this.platform.ready().then(() => {
@@ -105,7 +104,6 @@ export class NewsFeed {
     }
 
     refresh() {
-        console.log(this.config.user);
         this.newsFeedError = '';
         if (this.skip > 0) {this.content.scrollToTop();}
         this.skip = 0;
@@ -119,13 +117,10 @@ export class NewsFeed {
     }
 
     fetchArticles(skip: number) {
-        debugger;
         //var loading = this.createLoading();
         //this.nav.present(loading); // TODO: Fix bug when used with OnPageWillEnter and OnPageDidEnter
         this.service.getNewsFeed(this.config.user.Id, skip)
             .subscribe(posts => {
-                debugger;
-                console.log(posts);
                 //loading.dismiss();
                 this.update(posts, skip);
             },

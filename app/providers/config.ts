@@ -40,14 +40,11 @@ export class Config {
             let userOb = this.service.getUser(userId, this.language);
             userOb.subscribe(data => {
                 parentThis.user = data;
-                console.log(this.user);
             });
             return userOb;
         }
         else {
             parentThis.user = user;
-                console.log(parentThis.user.Id);
-                console.log(parentThis.user.CanPost);
             return Observable.of(user);
         }
     }
