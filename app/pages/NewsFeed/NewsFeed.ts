@@ -31,6 +31,7 @@ import {Notifications} from '../../providers/notifications';
 export class NewsFeed {
     @ViewChild(Content) content: Content;
     @ViewChild(List) list: List;
+    canPost: boolean = true;
     
     constructor(public http: Http, public platform: Platform, public nav: NavController, public navParams: NavParams,
         public config: Config, public service: ServiceCaller, public notifications: Notifications) {
@@ -48,6 +49,7 @@ export class NewsFeed {
     }
 
     init() {
+        this.canPost = this.config.user.CanPost;
         this.subscribeToNotifications();
         this.refresh();
         //this.loadContacts();
