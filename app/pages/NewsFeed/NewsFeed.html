@@ -1,0 +1,95 @@
+<ion-navbar *navbar hideBackButton class="show-navbar android-attr navbar">
+    <ion-buttons center class="navbar">
+        <ion-row>
+            <ion-col>
+                <button (click)="refresh()">
+                    <ion-icon name="ios-home-outline"></ion-icon>
+                    <sup *ngIf="homeBadgeNumber > 0" style="color:red">
+                        {{homeBadgeNumber < 9 ? homeBadgeNumber: 9}}                        
+                        <span *ngIf="homeBadgeNumber > 9">+</span>
+                    </sup>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button (click)="openCategorySettings()">
+                    <ion-icon name="ios-apps-outline"></ion-icon>
+                </button>
+            </ion-col>
+
+            <ion-col>
+                <button (click)="createNewPost()">
+                    <ion-icon name="ios-create-outline"></ion-icon>
+                    <!--
+                    <sup *ngIf="notificationBadgeNumber > 0" style="color:red">
+                        {{notificationBadgeNumber < 9 ? notificationBadgeNumber:9}} 
+                        <span *ngIf="notificationBadgeNumber > 9">+</span> 
+                    </sup>
+                    -->
+                </button>
+            </ion-col>
+
+            <ion-col>
+                <button (click)="showContacts()" [disabled]="!isContactsLoaded">
+                    <ion-icon name="ios-contacts-outline"></ion-icon>
+                </button>
+            </ion-col>
+            <!--
+            <ion-col>
+                <button (click)="openUserSettings()">
+                    <ion-icon name="ios-settings-outline"></ion-icon>
+                </button>
+            </ion-col>
+            -->
+        </ion-row>
+    </ion-buttons>
+</ion-navbar>
+
+<ion-content class="has-header components-demo cards-bg social-cards" [style.background]="backgroundImageUrl">
+    <ion-list #list>
+        <ion-item *ngFor="let article of articles; #i = index" text-wrap class="item item-trns text-center">
+            <ion-card>
+                <div (click)="openFullArticle($event,article.OriginalLink)">
+                    <img src="{{article.ImageUrl}}">
+                    <ion-card-content>
+                        <h2> <b>{{article.Heading}} </b> </h2>
+                        <br>
+                        <p align="justify">{{article.Snippet}}</p>
+                    </ion-card-content>
+                </div>
+                <ion-row>
+                    <ion-col>
+                        <ion-icon [hidden]="contains(article.LikedBy,userId)" (click)="addLike(article, userId)" name='ios-thumbs-up-outline'></ion-icon>
+                        <ion-icon [hidden]="!contains(article.LikedBy,userId)" (click)="removeLike(article, userId)" name='thumbs-up'></ion-icon>
+                        {{article.LikedBy.length}}
+                    </ion-col>
+                    <ion-col>
+                        <ion-icon [hidden]="contains(article.SharedBy,userId)" (click)="reTweet(article, userId)" name='ios-repeat'></ion-icon>
+                        <ion-icon [hidden]="!contains(article.SharedBy,userId)" (click)="undoReTweet(article, userId)" name='md-repeat'></ion-icon>
+                        {{article.SharedBy.length}}
+                    </ion-col>
+                    <ion-col>
+                        <ion-icon (click)="shareScreenshot(article.Id)" name='md-share'></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-item>
+    </ion-list>
+    
+<ion-infinite-scroll (infinite)="doInfinite($event)" threshold="50%">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>
+
+<style>
+    .myslide {
+        -webkit-font-smoothing: none !important;
+    }
+    
+.item.item-trns {
+	background-color: rgba(0, 0, 0, 0);
+}
+            
+    .navbar {
+        background-color: white !important;
+    }
+</style>
